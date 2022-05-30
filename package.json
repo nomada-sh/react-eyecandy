@@ -1,0 +1,17 @@
+{
+  "name": "react-eyecandy",
+  "version": "0.0.0",
+  "repository": "git@github.com:nomada-sh/react-eyecandy.git",
+  "author": "nomada-sh",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "website",
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "start:website": "yarn workspace website start"
+  }
+}
