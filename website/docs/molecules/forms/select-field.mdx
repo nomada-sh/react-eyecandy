@@ -1,1 +1,32 @@
 # Select Field
+
+## Examples
+
+```jsx
+import React from 'react';
+import { Select } from 'antd';
+
+export default function App() {
+  return (
+    <Select
+      style={{ width: 120 }}
+      defaultValue="option-1"
+    >
+      <Select.Option value="Option 1">Option 1</Select.Option>
+      <Select.Option value="Option 2">Option 2</Select.Option>
+      <Select.Option value="Option 3">Option 3</Select.Option>
+      <Select.Option value="Option 4">Option 4</Select.Option>
+    </Select>
+  );
+}
+```
+
+import { Select } from 'antd';
+
+<Select style={{ width: 120 }} defaultValue="option-1">
+  <Select.Option value="option-1">Option 1</Select.Option>
+  <Select.Option value="option-2">Option 2</Select.Option>
+  <Select.Option value="option-3">Option 3</Select.Option>
+  <Select.Option value="option-4">Option 4</Select.Option>
+</Select>
+

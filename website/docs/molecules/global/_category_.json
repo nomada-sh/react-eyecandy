@@ -1,6 +1,6 @@
 {
-  "label": "Molecules",
-  "position": 2,
+  "label": "Global",
+  "position": 4,
   "link": {
     "type": "generated-index"
   }
