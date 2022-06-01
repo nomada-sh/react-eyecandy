@@ -47,9 +47,11 @@ export function CardList({
           padding: '0 50px',
         }}
       >
-        <PageHeader style={{ marginTop: '1.5rem' }}>
-          {title}
-        </PageHeader>
+        <PageHeader
+          title={title}
+          subtitle={subtitle}
+          style={{ margin: '1.5rem 0' }}
+        />
         <div
           style={{
             display: "flex",

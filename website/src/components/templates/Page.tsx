@@ -31,9 +31,11 @@ export function Page() {
           padding: '0 50px',
         }}
       >
-        <PageHeader style={{marginTop: '1.5rem'}}>
-          This is the page title
-        </PageHeader>
+        <PageHeader
+          title="This is the page title"
+          subtitle="This is the page subtitle"
+          style={{margin: '1.5rem 0'}}
+        />
         <div
           style={{
             background: "#fff",
