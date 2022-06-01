@@ -1,0 +1,75 @@
+---
+sidebar_position: 1
+---
+
+# Forms
+
+import {
+    Input, Select, Checkbox, Radio,
+} from 'antd';
+
+export const TextArea = Input.TextArea;
+
+Text Input
+
+```jsx
+<Input placeholder="Placeholder" />
+```
+
+---
+
+<Input placeholder="Placeholder" />
+
+---
+
+Textarea
+
+```jsx
+<TextArea rows={4} />
+```
+
+---
+
+<TextArea rows={4} placeholder="Placeholder" />
+
+---
+
+Select
+ 
+```jsx
+<Select defaultValue="1">
+    <Select.Option value="1">Option 1</Select.Option>
+    <Select.Option value="2">Option 2</Select.Option>
+</Select>
+```
+
+---
+
+<Select defaultValue="1" style={{ width: '100%' }}>
+    <Select.Option value="1">Option 1</Select.Option>
+    <Select.Option value="2">Option 2</Select.Option>
+</Select>
+
+---
+
+Checkbox
+
+```jsx
+<Checkbox checked />
+```
+
+---
+
+<Checkbox checked />
+
+---
+
+Radio Button
+
+```jsx
+<Radio checked />
+```
+
+---
+
+<Radio checked />
