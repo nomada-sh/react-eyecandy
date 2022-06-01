@@ -1,0 +1,33 @@
+# Checkbox Field
+
+## Examples
+
+```jsx
+import React from 'react';
+import { Checkbox } from 'antd';
+
+const options = [
+  { label: 'Apple', value: 'Apple' },
+  { label: 'Pear', value: 'Pear' },
+  { label: 'Orange', value: 'Orange' },
+];
+
+export default function App() {
+  return (
+    <Checkbox.Group
+      options={options}
+    />
+  );
+}
+```
+
+import { Checkbox } from 'antd';
+
+<Checkbox.Group
+  options={[
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange' },
+  ]}
+/>
+
