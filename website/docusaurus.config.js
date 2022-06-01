@@ -28,6 +28,7 @@ const config = {
   },
 
   themes: [],
+  plugins: [],
 
   presets: [
     [
