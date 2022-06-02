@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -35,8 +35,8 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "react-eyecandy",
-  "author": "canciller",
+  "name": "@nomada-sh/react-eyecandy",
+  "author": "nomada-sh",
   "module": "dist/react-eyecandy.esm.js",
   "size-limit": [
     {
@@ -56,13 +56,13 @@
     "@storybook/addon-links": "^6.5.6",
     "@storybook/addons": "^6.5.6",
     "@storybook/react": "^6.5.6",
-    "@types/react": "^18.0.10",
-    "@types/react-dom": "^18.0.5",
+    "@types/react": "^17.0.45",
+    "@types/react-dom": "^17.0.17",
     "babel-loader": "^8.2.5",
     "husky": "^8.0.1",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-is": "^18.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-is": "^17.0.2",
     "size-limit": "^7.0.8",
     "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
