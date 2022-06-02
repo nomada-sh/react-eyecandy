@@ -8,10 +8,12 @@
   "workspaces": {
     "packages": [
       "website",
+      "example",
       "packages/*"
     ]
   },
   "scripts": {
-    "start:website": "yarn workspace website start"
+    "start:website": "yarn workspace website start",
+    "start:example": "yarn workspace example start"
   }
 }
