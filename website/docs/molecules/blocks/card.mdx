@@ -1,27 +1,9 @@
 # Card
 
-## Examples
+import { Card } from '@site/src/components/molecules/Card';
 
-```jsx
-import React from 'react';
-import { Card } from 'antd';
-
-export default function App() {
-  return (
-      <Card title="Card" extra={<a href="#">More</a>} style={{ width: 300 }}>
-        <p>Card content</p>
-        <p>Card content</p>
-        <p>Card content</p>
-      </Card>
-  );
-}
-```
-
-import { Card } from 'antd';
-
-<Card title="Card" extra={<a href="#">More</a>} style={{ width: 300 }}>
-  <p>Card content</p>
-  <p>Card content</p>
-  <p>Card content</p>
-</Card>
-
+<Card
+  title="Card Title"
+  image="https://picsum.photos/200"
+  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+/>
