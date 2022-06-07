@@ -2,8 +2,8 @@ import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import { ToggleTheme } from './ToggleTheme';
 
 const themes = {
-  light: 'theme-light.css',
-  dark: 'theme-dark.css',
+  light: `${process.env.PUBLIC_URL}/css/theme-light.css`,
+  dark: `${process.env.PUBLIC_URL}/css/theme-dark.css`,
 };
 
 export function App() {
@@ -16,4 +16,3 @@ export function App() {
     </ThemeSwitcherProvider>
   );
 }
-2
