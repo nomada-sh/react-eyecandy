@@ -1,32 +1,27 @@
-import { Button } from 'antd';
-import React from 'react';
-import { useThemeSwitcher } from 'react-css-theme-switcher';
+import { Button, Input, Alert, Typography } from 'antd';
+import { useTheme } from '@nomada-sh/react-eyecandy';
 
 export function ToggleTheme() {
-  const { switcher, themes, currentTheme, status } = useThemeSwitcher();
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
-
-
-  if (status === 'loading') {
-    return <div>Loading styles...</div>;
-  }
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(previous => {
-      switcher({ theme: previous ? themes.light : themes.dark });
-      return !previous;
-    });
-  };
+  const { dark, setDark } = useTheme();
 
   return (
     <div>
-      <h2>Current theme: {currentTheme}</h2>
+      <Typography.Paragraph>
+        Theme: {dark ? 'dark' : 'light'}
+      </Typography.Paragraph>
       <Button
         type="primary"
-        onClick={toggleDarkMode}
+        onClick={() => setDark(!dark)}
       >
         Toggle Theme
       </Button>
+      <Input />
+      <Alert
+        message="Error"
+        description="This is an error message about copywriting."
+        type="error"
+        showIcon
+      />
     </div>
   );
 }

@@ -15642,6 +15642,13 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
+react-app-rewired@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-app-rewired/-/react-app-rewired-2.2.1.tgz#84901ee1e3f26add0377ebec0b41bcdfce9fc211"
+  integrity sha512-uFQWTErXeLDrMzOJHKp0h8P1z0LV9HzPGsJ6adOtGlA/B9WfT6Shh4j2tLTTGlXOfiVx6w6iWpp7SOC5pvk+gA==
+  dependencies:
+    semver "^5.6.0"
+
 react-base16-styling@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/react-base16-styling/-/react-base16-styling-0.6.0.tgz#ef2156d66cf4139695c8a167886cb69ea660792c"
@@ -15658,11 +15665,6 @@ react-clientside-effect@^1.2.6:
   integrity sha512-XGGGRQAKY+q25Lz9a/4EPqom7WRjz3z9R2k4jhVKA/puQFH/5Nt27vFZYql4m4NVNdUvX8PS3O7r/Zzm7cjUlg==
   dependencies:
     "@babel/runtime" "^7.12.13"
-
-react-css-theme-switcher@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/react-css-theme-switcher/-/react-css-theme-switcher-0.3.0.tgz#a527f52c378474cb74ee4d83867aa6face424400"
-  integrity sha512-RV+fJ6mSbtsLOgIgeL4Q8MEH4Hyl72tQvGpCFBbk3ia6ie3KzXO1gfbKTV2q1ryP3hBpmyy1qrX+6E1f937A1A==
 
 react-dev-utils@^12.0.1:
   version "12.0.1"
