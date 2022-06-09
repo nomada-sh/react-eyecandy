@@ -2,7 +2,7 @@ import { Button, Input, Alert, Typography } from 'antd';
 import { useTheme } from '@nomada-sh/react-eyecandy';
 
 export function ToggleTheme() {
-  const { dark, setDark, modifyTheme } = useTheme();
+  const { dark, toggleDark, modifyTheme } = useTheme();
 
   return (
     <div>
@@ -12,7 +12,7 @@ export function ToggleTheme() {
       <Button
         type="primary"
         onClick={() => {
-          setDark(!dark);
+          toggleDark();
         }}
       >
         Toggle Theme
