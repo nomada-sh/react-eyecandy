@@ -11,11 +11,11 @@ import { Theme } from './types';
 
 jest.mock('./utils/modifyLessVars', () => {
   return {
-    modifyLessVars: jest.fn()
-  }
+    modifyLessVars: jest.fn(),
+  };
 });
 
-test('default values', () => {
+test('uses default initial values', () => {
   jest.clearAllMocks();
 
   const wrapper = ({ children }: any) => (
@@ -32,28 +32,10 @@ test('default values', () => {
   expect(result.current.setThemeChanges).toBeInstanceOf(Function);
   expect(result.current.toggleDark).toBeInstanceOf(Function);
   expect(modifyLessVars).toHaveBeenCalledTimes(1);
-  expect(modifyLessVars).toHaveBeenCalledWith(
-    themeToLessVars(DefaultTheme),
-  );
+  expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DefaultTheme));
 });
 
-test('uses default theme', () => {
-  jest.clearAllMocks();
-
-  const wrapper = ({ children }: any) => (
-    <ThemeProvider>{children}</ThemeProvider>
-  );
-  const { result } = renderHook(() => useTheme(), { wrapper });
-
-  expect(result.current.dark).toBe(false);
-  expect(result.current.composedTheme).toEqual(DefaultTheme);
-  expect(modifyLessVars).toHaveBeenCalledTimes(1);
-  expect(modifyLessVars).toHaveBeenCalledWith(
-    themeToLessVars(DefaultTheme),
-  );
-});
-
-test('uses dark theme', () => {
+test('uses initial dark theme', () => {
   jest.clearAllMocks();
 
   const wrapper = ({ children }: any) => (
@@ -64,9 +46,29 @@ test('uses dark theme', () => {
   expect(result.current.dark).toBe(true);
   expect(result.current.composedTheme).toEqual(DarkTheme);
   expect(modifyLessVars).toHaveBeenCalledTimes(1);
-  expect(modifyLessVars).toHaveBeenCalledWith(
-    themeToLessVars(DarkTheme),
+  expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DarkTheme));
+});
+
+test('uses initial theme changes', () => {
+  jest.clearAllMocks();
+
+  const themeChanges: Partial<Theme> = {
+    primary_color: 'green',
+    body_background: 'black',
+  };
+  const wrapper = ({ children }: any) => (
+    <ThemeProvider themeChanges={themeChanges}>{children}</ThemeProvider>
   );
+
+  const { result } = renderHook(() => useTheme(), { wrapper });
+
+  expect(result.current.themeChanges).toEqual(themeChanges);
+
+  const composedTheme = composeTheme(DefaultTheme, themeChanges);
+  expect(result.current.composedTheme).toEqual(composedTheme);
+
+  expect(modifyLessVars).toHaveBeenCalledTimes(1);
+  expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(composedTheme));
 });
 
 test('can toggle theme', () => {
@@ -81,9 +83,7 @@ test('can toggle theme', () => {
   expect(result.current.dark).toBe(false);
   expect(result.current.composedTheme).toEqual(DefaultTheme);
   expect(modifyLessVars).toHaveBeenCalledTimes(1);
-  expect(modifyLessVars).toHaveBeenCalledWith(
-    themeToLessVars(DefaultTheme),
-  );
+  expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DefaultTheme));
 
   act(() => {
     result.current.toggleDark();
@@ -92,9 +92,7 @@ test('can toggle theme', () => {
   expect(result.current.dark).toBe(true);
   expect(result.current.composedTheme).toEqual(DarkTheme);
   expect(modifyLessVars).toHaveBeenCalledTimes(2);
-  expect(modifyLessVars).toHaveBeenCalledWith(
-    themeToLessVars(DarkTheme),
-  );
+  expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DarkTheme));
 
   act(() => {
     result.current.setDark(false);
@@ -103,9 +101,7 @@ test('can toggle theme', () => {
   expect(result.current.dark).toBe(false);
   expect(result.current.composedTheme).toEqual(DefaultTheme);
   expect(modifyLessVars).toHaveBeenCalledTimes(3);
-  expect(modifyLessVars).toHaveBeenCalledWith(
-    themeToLessVars(DefaultTheme),
-  );
+  expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DefaultTheme));
 });
 
 test('can change theme', () => {
@@ -119,11 +115,11 @@ test('can change theme', () => {
   const themeChanges: Partial<Theme> = {
     primary_color: 'red',
     body_background: 'blue',
-  }
+  };
 
   act(() => {
     result.current.setThemeChanges(themeChanges);
-  })
+  });
 
   expect(result.current.themeChanges).toEqual(themeChanges);
 
@@ -131,7 +127,5 @@ test('can change theme', () => {
   expect(result.current.composedTheme).toEqual(composedTheme);
 
   expect(modifyLessVars).toHaveBeenCalledTimes(2);
-  expect(modifyLessVars).toHaveBeenCalledWith(
-    themeToLessVars(composedTheme),
-  );
-})
+  expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(composedTheme));
+});
