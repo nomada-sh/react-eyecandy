@@ -27,6 +27,7 @@ test('uses default initial values', () => {
   expect(result.current.themeChanges).toEqual({});
   expect(result.current.baseDefaultTheme).toEqual(DefaultTheme);
   expect(result.current.baseDarkTheme).toEqual(DarkTheme);
+  expect(result.current.currentBaseTheme).toEqual(DefaultTheme);
   expect(result.current.setDark).toBeInstanceOf(Function);
   expect(result.current.setThemeChanges).toBeInstanceOf(Function);
   expect(result.current.toggleDark).toBeInstanceOf(Function);
@@ -43,6 +44,7 @@ test('uses initial dark theme', () => {
   const { result } = renderHook(() => useTheme(), { wrapper });
 
   expect(result.current.dark).toBe(true);
+  expect(result.current.currentBaseTheme).toEqual(DarkTheme);
   expect(modifyLessVars).toHaveBeenCalledTimes(1);
   expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DarkTheme));
 });
@@ -78,6 +80,7 @@ test('can toggle theme', () => {
   const { result } = renderHook(() => useTheme(), { wrapper });
 
   expect(result.current.dark).toBe(false);
+  expect(result.current.currentBaseTheme).toEqual(DefaultTheme);
   expect(modifyLessVars).toHaveBeenCalledTimes(1);
   expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DefaultTheme));
 
@@ -86,6 +89,7 @@ test('can toggle theme', () => {
   });
 
   expect(result.current.dark).toBe(true);
+  expect(result.current.currentBaseTheme).toEqual(DarkTheme);
   expect(modifyLessVars).toHaveBeenCalledTimes(2);
   expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DarkTheme));
 
@@ -94,6 +98,7 @@ test('can toggle theme', () => {
   });
 
   expect(result.current.dark).toBe(false);
+  expect(result.current.currentBaseTheme).toEqual(DefaultTheme);
   expect(modifyLessVars).toHaveBeenCalledTimes(3);
   expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DefaultTheme));
 });
