@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { DarkTheme } from './DarkTheme';
 import { DefaultTheme } from './DefaultTheme';
 import { themeToLessVars } from './utils/themeToLessVars';
+import { Theme } from './types';
 
 // TODO: Add window.less type
 function modifyLessVars(vars: { [key: string]: string }) {
@@ -21,6 +22,12 @@ export function useTheme() {
 
   if (!context) throw new Error('useTheme must be used within a ThemeProvider');
 
+  const modifyTheme = (theme: Partial <Theme>) => {
+    const newTheme = Object.assign({}, dark ? DarkTheme : DefaultTheme, theme);
+    const vars = themeToLessVars(newTheme);
+    modifyLessVars(vars);
+  };
+
   useEffect(() => {
     const vars = themeToLessVars(dark ? DarkTheme : DefaultTheme);
     modifyLessVars(vars);
@@ -28,6 +35,6 @@ export function useTheme() {
 
   return {
     ...context,
-    modifyLessVars,
+    modifyTheme,
   };
 }
