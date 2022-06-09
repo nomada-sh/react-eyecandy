@@ -14,18 +14,16 @@ export function useTheme() {
 
   if (!ctx) throw new Error('useTheme must be used within a ThemeProvider');
 
-  const { dark, themeChanges } = ctx;
-
   const setDark = useCallback(
     /**
      * // TODO: Describe
      * @param dark
      */
     (dark: boolean) => {
-      composeTheme(dark ? DarkTheme : DefaultTheme, themeChanges);
+      composeTheme(dark ? DarkTheme : DefaultTheme, ctx.themeChanges);
       ctx.setDark(dark);
     },
-    [ctx.setDark, themeChanges]
+    [ctx.setDark, ctx.themeChanges]
   );
 
   const modifyTheme = useCallback(
@@ -34,24 +32,22 @@ export function useTheme() {
      * @param themeChanges
      */
     (themeChanges: Partial<Theme>) => {
-      composeTheme(dark ? DarkTheme : DefaultTheme, themeChanges);
+      composeTheme(ctx.dark ? DarkTheme : DefaultTheme, themeChanges);
       ctx.setThemeChanges(themeChanges);
     },
-    [ctx.setThemeChanges, dark]
+    [ctx.setThemeChanges, ctx.dark]
   );
 
   const toggleDark = useCallback(
     /**
      * // TODO: Describe
      */
-    () => {
-      setDark(!dark);
-    },
-    [setDark, dark]
+    () => setDark(!ctx.dark),
+    [setDark, ctx.dark]
   );
 
   return {
-    dark,
+    dark: ctx.dark,
     setDark,
     toggleDark,
     modifyTheme,
@@ -79,7 +75,7 @@ function composeTheme(
  * @param vars
  */
 function modifyLessVars(vars: { [key: string]: string }) {
-  // TODO: Add window.less type
+  // TODO: Add window.less type and remove ts-ignore
   // @ts-ignore
   if (window.less === undefined)
     console.warn('useTheme: window.less is undefined');

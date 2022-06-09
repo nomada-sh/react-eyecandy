@@ -27,6 +27,7 @@ export function ThemeProvider({
   theme: initialThemeChanges,
 }: ThemeProviderProps) {
   const [dark, setDark] = React.useState(Boolean(initialDark));
+
   const [themeChanges, setThemeChanges] = React.useState<Partial<Theme>>(
     initialThemeChanges || {}
   );
