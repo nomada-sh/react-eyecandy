@@ -15,5 +15,6 @@
   "scripts": {
     "start:website": "yarn workspace website start",
     "start:example": "yarn workspace example start"
-  }
+  },
+  "dependencies": {}
 }

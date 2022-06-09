@@ -15,8 +15,11 @@ export interface ThemeProviderProps {
   children: React.ReactNode;
 }
 
-export function ThemeProvider({ children, dark: initialDark }: ThemeProviderProps) {
-  const [dark, setDark] = React.useState(!!initialDark);
+export function ThemeProvider({
+  children,
+  dark: initialDark,
+}: ThemeProviderProps) {
+  const [dark, setDark] = React.useState(Boolean(initialDark));
 
   return (
     <ThemeContext.Provider value={{ dark, setDark }}>

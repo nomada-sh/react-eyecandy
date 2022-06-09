@@ -2,7 +2,7 @@ import { Button, Input, Alert, Typography } from 'antd';
 import { useTheme } from '@nomada-sh/react-eyecandy';
 
 export function ToggleTheme() {
-  const { dark, setDark } = useTheme();
+  const { dark, setDark, modifyLessVars } = useTheme();
 
   return (
     <div>
@@ -11,11 +11,21 @@ export function ToggleTheme() {
       </Typography.Paragraph>
       <Button
         type="primary"
-        onClick={() => setDark(!dark)}
+        onClick={() => {
+          setDark(!dark);
+        }}
       >
         Toggle Theme
       </Button>
       <Input />
+      <input
+        type="color"
+        onChange={(e) => {
+          modifyLessVars({
+            '@primary-color': e.target.value,
+          });
+        }}
+      />
       <Alert
         message="Error"
         description="This is an error message about copywriting."
