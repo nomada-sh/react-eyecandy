@@ -10,6 +10,7 @@ export function themeToLessVars(theme: Partial<Theme>): { [key: string]: string 
     newKey = newKey.replace(/_/g, '-');
 
     // FIXME: Type errors are not displayed.
+    // I think it's because there is not a tsconfig.json file in the root of the project.
     // @ts-ignore
     vars[newKey] = value;
   });

@@ -2,7 +2,7 @@ import { Button, Input, Alert, Typography } from 'antd';
 import { useTheme } from '@nomada-sh/react-eyecandy';
 
 export function ToggleTheme() {
-  const { dark, toggleDark, modifyTheme } = useTheme();
+  const { dark, toggleDark, setThemeChanges } = useTheme();
 
   return (
     <div>
@@ -21,7 +21,7 @@ export function ToggleTheme() {
       <input
         type="color"
         onChange={(e) => {
-          modifyTheme({
+          setThemeChanges({
             primary_color: e.target.value,
           })
         }}
