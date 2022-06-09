@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import { useEffect } from 'react';
-import { useMemo } from 'react';
 import { DarkTheme } from './DarkTheme';
 import { DefaultTheme } from './DefaultTheme';
 import { Theme } from './types';
@@ -17,7 +16,6 @@ export interface ThemeContextValue {
   baseDarkTheme: Partial<Theme>;
   baseDefaultTheme: Partial<Theme>;
   currentBaseTheme: Partial<Theme>;
-  composedTheme: Partial<Theme>;
 }
 
 export const ThemeContext = React.createContext<ThemeContextValue>({
@@ -29,7 +27,6 @@ export const ThemeContext = React.createContext<ThemeContextValue>({
   baseDarkTheme: DarkTheme,
   baseDefaultTheme: DefaultTheme,
   currentBaseTheme: DefaultTheme,
-  composedTheme: DefaultTheme,
 });
 
 export interface ThemeProviderProps {
@@ -58,15 +55,12 @@ export function ThemeProvider({
 
   const currentBaseTheme = dark ? baseDarkTheme : baseDefaultTheme;
 
-  const composedTheme = useMemo(
-    () => composeTheme(currentBaseTheme, themeChanges),
-    [currentBaseTheme, themeChanges]
-  );
-
   useEffect(() => {
     // This is the line that actually modifies the less variables.
-    modifyLessVars(themeToLessVars(composedTheme));
-  }, [composedTheme]);
+    modifyLessVars(themeToLessVars(
+      composeTheme(currentBaseTheme, themeChanges)
+    ));
+  }, [currentBaseTheme, themeChanges]);
 
   return (
     <ThemeContext.Provider
@@ -79,7 +73,6 @@ export function ThemeProvider({
         baseDefaultTheme,
         baseDarkTheme,
         currentBaseTheme,
-        composedTheme,
       }}
     >
       {children}
