@@ -23,7 +23,7 @@ export function ToggleTheme() {
         onChange={(e) => {
           setThemeChanges({
             primary_color: e.target.value,
-          })
+          });
         }}
       />
       <Alert
