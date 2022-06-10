@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@nomada-sh/react-eyecandy';
 import { ToggleTheme } from './ToggleTheme';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.less';
 
 export function App() {
   return (
