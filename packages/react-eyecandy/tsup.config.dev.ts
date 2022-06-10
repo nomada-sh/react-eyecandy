@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsup'
+import { defineConfig } from 'tsup';
 
 export default defineConfig({
   entry: ['src'],
@@ -6,4 +6,4 @@ export default defineConfig({
   sourcemap: 'inline',
   clean: true,
   dts: true,
-})
+});
