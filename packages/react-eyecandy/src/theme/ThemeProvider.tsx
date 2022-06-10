@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { DarkTheme } from './DarkTheme';
 import { DefaultTheme } from './DefaultTheme';
@@ -48,18 +48,17 @@ export function ThemeProvider({
     initialThemeChanges || {}
   );
 
-  const [baseDefaultTheme, setDefaultTheme] = useState<Partial<Theme>>(
-    DefaultTheme
-  );
+  const [baseDefaultTheme, setDefaultTheme] =
+    useState<Partial<Theme>>(DefaultTheme);
   const [baseDarkTheme, setDarkTheme] = useState<Partial<Theme>>(DarkTheme);
 
   const currentBaseTheme = dark ? baseDarkTheme : baseDefaultTheme;
 
   useEffect(() => {
     // This is the line that actually modifies the less variables.
-    modifyLessVars(themeToLessVars(
-      composeTheme(currentBaseTheme, themeChanges)
-    ));
+    modifyLessVars(
+      themeToLessVars(composeTheme(currentBaseTheme, themeChanges))
+    );
   }, [currentBaseTheme, themeChanges]);
 
   return (
@@ -78,4 +77,12 @@ export function ThemeProvider({
       {children}
     </ThemeContext.Provider>
   );
+}
+
+export function useTheme() {
+  const ctx = useContext(ThemeContext);
+
+  if (!ctx) throw new Error('useTheme must be used within a ThemeProvider');
+
+  return ctx;
 }

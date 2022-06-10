@@ -1,7 +1,6 @@
 import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { ThemeProvider } from './ThemeProvider';
-import { useTheme } from './useTheme';
+import { ThemeProvider, useTheme } from './ThemeProvider';
 import { DefaultTheme } from './DefaultTheme';
 import { DarkTheme } from './DarkTheme';
 import { modifyLessVars } from './utils/modifyLessVars';

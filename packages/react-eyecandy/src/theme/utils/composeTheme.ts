@@ -7,6 +7,5 @@ export function composeTheme(
   return {
     ...baseTheme,
     ...themeChanges,
-  }
+  };
 }
-

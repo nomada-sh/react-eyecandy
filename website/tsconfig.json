@@ -1,7 +1,14 @@
 {
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
+    "composite": true,
+    "noEmit": false,
     "jsx": "react-jsx",
     "baseUrl": "."
-  }
+  },
+  "references": [
+    {
+      "path": "../packages/react-eyecandy"
+    }
+  ]
 }

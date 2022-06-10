@@ -1,11 +1,8 @@
 {
   "compilerOptions": {
+    "composite": true,
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,15 +14,13 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "paths": {
-      "@nomada-sh/*": [
-        "../packages/*/src"
-      ]
-    }
+    "noEmit": false,
+    "jsx": "react-jsx"
   },
-  "include": [
-    "src"
-  ]
+  "references": [
+    {
+      "path": "../packages/react-eyecandy"
+    }
+  ],
+  "include": ["src"]
 }
