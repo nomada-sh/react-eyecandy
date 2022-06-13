@@ -10,10 +10,20 @@ import { themeToLessVars } from './utils/themeToLessVars';
 export interface ThemeContextValue {
   dark: boolean;
   setDark: (dark: boolean) => void;
-  themeChanges: Partial<Theme>;
-  setThemeChanges: (themeChanges: Partial<Theme>) => void;
-  clearThemeChanges: () => void;
   toggleDark: () => void;
+  themeChanges: Partial<Theme>;
+  /**
+   * Set new theme changes replacing the previous theme changes.
+   */
+  setThemeChanges: (themeChanges: Partial<Theme>) => void;
+  /**
+   * Merge new theme changes with current theme changes.
+   */
+  addThemeChanges: (themeChanges: Partial<Theme>) => void;
+  /**
+   * Clear all theme changes.
+   */
+  clearThemeChanges: () => void;
   baseDarkTheme: Partial<Theme>;
   baseDefaultTheme: Partial<Theme>;
   currentBaseTheme: Partial<Theme>;
@@ -24,6 +34,7 @@ export const ThemeContext = React.createContext<ThemeContextValue>({
   setDark: () => {},
   themeChanges: {},
   setThemeChanges: () => {},
+  addThemeChanges: () => {},
   clearThemeChanges: () => {},
   toggleDark: () => {},
   baseDarkTheme: DarkTheme,
@@ -50,6 +61,14 @@ export function ThemeProvider({
     initialThemeChanges || {}
   );
 
+  const addThemeChanges = useCallback(
+    (themeChanges: Partial<Theme>) =>
+      setThemeChanges((prevThemeChanges) =>
+        composeTheme(prevThemeChanges, themeChanges)
+      ),
+    []
+  );
+
   const clearThemeChanges = useCallback(() => setThemeChanges({}), []);
 
   const [baseDefaultTheme, setDefaultTheme] =
@@ -72,11 +91,12 @@ export function ThemeProvider({
         setDark,
         themeChanges,
         setThemeChanges,
+        clearThemeChanges,
+        addThemeChanges,
         toggleDark,
         baseDefaultTheme,
         baseDarkTheme,
         currentBaseTheme,
-        clearThemeChanges,
       }}
     >
       {children}

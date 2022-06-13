@@ -14,7 +14,7 @@ jest.mock('./utils/modifyLessVars', () => {
   };
 });
 
-test('uses default initial values', () => {
+test('default props', () => {
   jest.clearAllMocks();
 
   const wrapper = ({ children }: any) => (
@@ -34,7 +34,7 @@ test('uses default initial values', () => {
   expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DefaultTheme));
 });
 
-test('uses initial dark theme', () => {
+test('dark prop', () => {
   jest.clearAllMocks();
 
   const wrapper = ({ children }: any) => (
@@ -48,7 +48,7 @@ test('uses initial dark theme', () => {
   expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DarkTheme));
 });
 
-test('uses initial theme changes', () => {
+test('themeChanges prop', () => {
   jest.clearAllMocks();
 
   const themeChanges: Partial<Theme> = {
@@ -69,7 +69,7 @@ test('uses initial theme changes', () => {
   expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(composedTheme));
 });
 
-test('can toggle theme', () => {
+test('setDark, toggleDark', () => {
   jest.clearAllMocks();
 
   const wrapper = ({ children }: any) => (
@@ -102,7 +102,7 @@ test('can toggle theme', () => {
   expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DefaultTheme));
 });
 
-test('can change theme', () => {
+test('setThemeChanges', () => {
   jest.clearAllMocks();
 
   const wrapper = ({ children }: any) => (
@@ -124,5 +124,76 @@ test('can change theme', () => {
   const composedTheme = composeTheme(DefaultTheme, themeChanges);
 
   expect(modifyLessVars).toHaveBeenCalledTimes(2);
+  expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(composedTheme));
+});
+
+test('clearThemeChanges', () => {
+  jest.clearAllMocks();
+
+  const wrapper = ({ children }: any) => (
+    <ThemeProvider>{children}</ThemeProvider>
+  );
+
+  const { result } = renderHook(() => useTheme(), { wrapper });
+  const themeChanges: Partial<Theme> = {
+    primary_color: 'red',
+    body_background: 'blue',
+  };
+
+  act(() => {
+    result.current.setThemeChanges(themeChanges);
+  });
+
+  expect(result.current.themeChanges).toEqual(themeChanges);
+
+  act(() => {
+    result.current.clearThemeChanges();
+  });
+
+  expect(result.current.themeChanges).toEqual({});
+
+  expect(modifyLessVars).toHaveBeenCalledTimes(3);
+  expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(DefaultTheme));
+});
+
+test('addThemeChanges', () => {
+  jest.clearAllMocks();
+
+  const wrapper = ({ children }: any) => (
+    <ThemeProvider>{children}</ThemeProvider>
+  );
+
+  const { result } = renderHook(() => useTheme(), { wrapper });
+
+  const themeChanges1: Partial<Theme> = {
+    primary_color: 'red',
+    text_color: 'white',
+  };
+
+  const themeChanges2: Partial<Theme> = {
+    body_background: 'blue',
+    text_color: 'black',
+  };
+
+  const combinedThemeChanges = {
+    ...themeChanges1,
+    ...themeChanges2,
+  };
+
+  act(() => {
+    result.current.addThemeChanges(themeChanges1);
+  });
+
+  expect(result.current.themeChanges).toEqual(themeChanges1);
+
+  act(() => {
+    result.current.addThemeChanges(themeChanges2);
+  });
+
+  expect(result.current.themeChanges).toEqual(combinedThemeChanges);
+
+  const composedTheme = composeTheme(DefaultTheme, combinedThemeChanges);
+
+  expect(modifyLessVars).toHaveBeenCalledTimes(3);
   expect(modifyLessVars).toHaveBeenCalledWith(themeToLessVars(composedTheme));
 });
