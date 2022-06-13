@@ -12,6 +12,7 @@ export interface ThemeContextValue {
   setDark: (dark: boolean) => void;
   themeChanges: Partial<Theme>;
   setThemeChanges: (themeChanges: Partial<Theme>) => void;
+  clearThemeChanges: () => void;
   toggleDark: () => void;
   baseDarkTheme: Partial<Theme>;
   baseDefaultTheme: Partial<Theme>;
@@ -23,6 +24,7 @@ export const ThemeContext = React.createContext<ThemeContextValue>({
   setDark: () => {},
   themeChanges: {},
   setThemeChanges: () => {},
+  clearThemeChanges: () => {},
   toggleDark: () => {},
   baseDarkTheme: DarkTheme,
   baseDefaultTheme: DefaultTheme,
@@ -48,6 +50,8 @@ export function ThemeProvider({
     initialThemeChanges || {}
   );
 
+  const clearThemeChanges = useCallback(() => setThemeChanges({}), []);
+
   const [baseDefaultTheme, setDefaultTheme] =
     useState<Partial<Theme>>(DefaultTheme);
   const [baseDarkTheme, setDarkTheme] = useState<Partial<Theme>>(DarkTheme);
@@ -72,6 +76,7 @@ export function ThemeProvider({
         baseDefaultTheme,
         baseDarkTheme,
         currentBaseTheme,
+        clearThemeChanges,
       }}
     >
       {children}

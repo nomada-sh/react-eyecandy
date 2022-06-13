@@ -4,7 +4,7 @@ import { useTheme } from '@nomada-sh/react-eyecandy';
 const { Paragraph, Title } = Typography;
 
 export function ToggleTheme() {
-  const { dark, toggleDark, setThemeChanges } = useTheme();
+  const { dark, toggleDark, setThemeChanges, clearThemeChanges } = useTheme();
 
   return (
     <div>
@@ -17,17 +17,50 @@ export function ToggleTheme() {
           toggleDark();
         }}
       >
-        Toggle Theme
+        Toggle dark theme
       </Button>
-      <Input />
-      <input
-        type="color"
-        onChange={(e) => {
-          setThemeChanges({
-            primary_color: e.target.value,
-          });
+      <Button
+        onClick={() => {
+          clearThemeChanges();
         }}
-      />
+      >
+        Clear theme changes
+      </Button>
+      <div>
+        <label>Primary color </label>
+        <input
+          type="color"
+          onChange={(e) => {
+            setThemeChanges({
+              primary_color: e.target.value,
+            });
+          }}
+        />
+      </div>
+      <div>
+        <label>Text color </label>
+        <input
+          type="color"
+          onChange={(e) => {
+            setThemeChanges({
+              text_color: e.target.value,
+            });
+          }}
+        />
+      </div>
+      <div>
+        <label>Body background </label>
+        <input
+          type="color"
+          onChange={(e) => {
+            setThemeChanges({
+              body_background: e.target.value,
+            });
+          }}
+        />
+      </div>
+      <Input />
+      <Input.Search />
       <Alert
         message="Error"
         description="This is an error message."
