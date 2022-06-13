@@ -14,6 +14,10 @@
   },
   "scripts": {
     "start:website": "yarn workspace website start",
-    "start:example": "yarn workspace example start"
+    "start:example": "yarn workspace example start",
+    "start:react-eyecandy": "yarn workspace @nomada-sh/react-eyecandy start"
+  },
+  "dependencies": {
+    "typescript": "^4.7.2"
   }
 }

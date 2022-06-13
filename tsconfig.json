@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./example"
+    },
+    {
+      "path": "./packages/react-eyecandy"
+    },
+    {
+      "path": "./website"
+    }
+  ]
+}
