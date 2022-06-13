@@ -1,10 +1,15 @@
-import { Button, Input, Alert, Typography } from 'antd';
-import { useTheme } from '@nomada-sh/react-eyecandy';
+import {
+  useTheme,
+  Button,
+  Input,
+  Alert,
+  Typography,
+} from '@nomada-sh/react-eyecandy';
 
 const { Paragraph, Title } = Typography;
 
 export function ToggleTheme() {
-  const { dark, toggleDark, setThemeChanges, clearThemeChanges } = useTheme();
+  const { dark, toggleDark, addThemeChanges, clearThemeChanges } = useTheme();
 
   return (
     <div>
@@ -31,7 +36,7 @@ export function ToggleTheme() {
         <input
           type="color"
           onChange={(e) => {
-            setThemeChanges({
+            addThemeChanges({
               primary_color: e.target.value,
             });
           }}
@@ -42,7 +47,7 @@ export function ToggleTheme() {
         <input
           type="color"
           onChange={(e) => {
-            setThemeChanges({
+            addThemeChanges({
               text_color: e.target.value,
             });
           }}
@@ -53,7 +58,7 @@ export function ToggleTheme() {
         <input
           type="color"
           onChange={(e) => {
-            setThemeChanges({
+            addThemeChanges({
               body_background: e.target.value,
             });
           }}
