@@ -3,3 +3,4 @@ jest.config.js
 dist
 build
 packages/**/scripts
+packages/**/lib

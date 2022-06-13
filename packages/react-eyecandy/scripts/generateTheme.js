@@ -1,68 +1,14 @@
 const path = require('path');
 const fs = require('fs');
-const { getLessVars, generateTheme } = require('antd-theme-generator');
+const { generateTheme } = require('../lib/themeUtils');
 
-const getLessColorVars = filepath => {
-  const vars = getLessVars(filepath);
-  return Object.entries(vars).reduce((acc, [key, value]) => {
-    const include = /(color|-bg$|-background$|-background-light$|shadow|-border$|primary|blue|green|red|yellow|orange|pink|purple|cyan|magenta|volcano|gold|lime|geekblue)/.test(
-      key
-    );
-
-    if (include) acc[key] = value;
-    return acc;
-  }, {});
-};
-
-const defaultVariables = getLessColorVars(
-  path.join(
-    __dirname,
-    '../../../node_modules/antd/lib/style/themes/default.less'
-  )
-);
-const darkVariables = {
-  ...getLessColorVars(
-    path.join(
-      __dirname,
-      '../../../node_modules/antd/lib/style/themes/dark.less'
-    )
-  ),
-  '@primary-color': defaultVariables['@primary-color'],
-  '@picker-basic-cell-active-with-range-color': 'darken(@primary-color, 20%)',
-};
-
-const themeVariables = Array.from(
-  new Set([...Object.keys(darkVariables), ...Object.keys(defaultVariables)])
-);
-
-const options = {
-  antDir: path.join(__dirname, '../../../node_modules/antd'),
-  stylesDir: path.join(__dirname, '../src'),
-  themeVariables,
-};
-
-(async () => {
+(async function () {
   try {
-    await generateTheme(options);
-
-    const lessVarNameToJsVarName = lessVarName => {
-      let jsVarName = lessVarName;
-      // Remove @
-      jsVarName = jsVarName.replace(/^@/, '');
-      // Replace - with _
-      jsVarName = jsVarName.replace(/-/g, '_');
-
-      return jsVarName;
-    };
-
-    const lessValueToJsValue = lessValue => {
-      let jsValue = lessValue;
-
-      // Remove \n from value
-      jsValue = jsValue.replace(/\n/g, '');
-
-      return jsValue;
-    };
+    const { defaultVariables, darkVariables, themeVariables } =
+      await generateTheme({
+        antDir: path.join(__dirname, '../../../node_modules/antd'),
+        stylesDir: path.join(__dirname, '../src'),
+      });
 
     // Generate Theme.ts
     const ThemeContent =
@@ -75,6 +21,7 @@ const options = {
 
     const ThemePath = path.join(__dirname, '../src/theme/types/Theme.ts');
     fs.writeFileSync(ThemePath, ThemeContent);
+    console.log(`Generated ${ThemePath}`);
 
     const createTheme = ({ variables, name }) => {
       const content =
@@ -93,6 +40,7 @@ const options = {
 
       const filepath = path.join(__dirname, `../src/theme/${name}.ts`);
       fs.writeFileSync(filepath, content);
+      console.log(`Generated ${filepath}`);
     };
 
     // Generate DefaultTheme.ts
@@ -108,5 +56,25 @@ const options = {
     });
   } catch (e) {
     console.error(e);
+    process.exit(1);
   }
 })();
+
+function lessVarNameToJsVarName(lessVarName) {
+  let jsVarName = lessVarName;
+  // Remove @
+  jsVarName = jsVarName.replace(/^@/, '');
+  // Replace - with _
+  jsVarName = jsVarName.replace(/-/g, '_');
+
+  return jsVarName;
+}
+
+function lessValueToJsValue(lessValue) {
+  let jsValue = lessValue;
+
+  // Remove \n from value
+  jsValue = jsValue.replace(/\n/g, '');
+
+  return jsValue;
+}
