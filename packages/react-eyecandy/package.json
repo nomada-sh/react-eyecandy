@@ -13,6 +13,9 @@
   "engines": {
     "node": ">=10"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prepare": "tsup",
     "start": "tsup --config tsup.config.dev.ts --watch",
