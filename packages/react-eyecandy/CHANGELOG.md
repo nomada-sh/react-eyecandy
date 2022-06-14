@@ -4,8 +4,8 @@
 
 ### Patch Changes
 
-- - Added lib to files in package.json
-  - Added antd as a peerDependency
+- Added lib to files in package.json
+- Added antd as a peerDependency
 
 ## 0.0.1
 
