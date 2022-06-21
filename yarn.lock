@@ -11446,6 +11446,18 @@ rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-app-alias-ex@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-app-alias-ex/-/react-app-alias-ex-2.1.0.tgz#1e062ed002798371cc184ff3c1b094cc0592c458"
+  integrity sha512-MTr2yBSlU68ptmrukT8F6Fp6K6dp4Ui+uX/qV28oqGD+v+cLB+mOAnprvQOuG0zS6fW+X9Xk0QzaG6t30pQvHQ==
+  dependencies:
+    react-app-alias "^2.0.0"
+
+react-app-alias@^2.0.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-app-alias/-/react-app-alias-2.2.0.tgz#2320e9fa28188811020c3d9791e0e3424520006c"
+  integrity sha512-LaDIn+mbhimcvatV1DiBjh+8Lg6f3shEWqwy6IywfT3J3IIiEOTncChEYWTrnIvV9R97bRQoL9a95uAOQipyTA==
+
 react-app-polyfill@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-app-polyfill/-/react-app-polyfill-3.0.0.tgz#95221e0a9bd259e5ca6b177c7bb1cb6768f68fd7"
