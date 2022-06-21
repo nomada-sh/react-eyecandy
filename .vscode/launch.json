@@ -7,11 +7,11 @@
     {
       "type": "pwa-node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "generateTheme.js",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/example/scripts/generateTheme.js"
+      "program": "${workspaceFolder}/packages/react-eyecandy/scripts/generateTheme.js"
     }
   ]
 }

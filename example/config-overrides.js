@@ -1,20 +1,30 @@
-const { override, addWebpackPlugin } = require('customize-cra');
-const path = require('path');
+const { override } = require('customize-cra');
 const addLessLoader = require('customize-cra-less-loader');
-const EyecandyThemePlugin = require('@nomada-sh/react-eyecandy/lib/EyecandyThemePlugin');
-
-const options = {
-  antDir: path.join(__dirname, '../node_modules/antd'),
-  stylesDir: path.join(__dirname, './src'),
-  varFile: path.join(
-    __dirname,
-    '../node_modules/antd/lib/style/themes/default.less'
-  ),
-  outputFilePath: path.join(__dirname, './public/color.less'), // if provided, file will be created with generated less/styles
-};
+const path = require('path');
+const { aliasWebpack } = require('react-app-alias-ex');
 
 module.exports = override(
-  addWebpackPlugin(new EyecandyThemePlugin(options)),
+  // Fixes: Module not found: Error: Can't resolve '@nomada-sh/react-eyecandy' in 'example/src'.
+  aliasWebpack({
+    alias: {
+      '@nomada-sh/react-eyecandy': path.resolve(
+        '../packages/react-eyecandy/src'
+      ),
+    },
+  }),
+  // Fixes: TS6305: Output file 'packages/react-eyecandy/src/index.tsx'.
+  // has not been built from source file 'packages/react-eyecandy/src/index.tsx'.
+  // https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/issues/525#issuecomment-1008331771
+  (config) => {
+    const forkTsPlugInInstances = config.plugins.find(
+      (p) => p.constructor.name === 'ForkTsCheckerWebpackPlugin'
+    );
+    if (!forkTsPlugInInstances) return config;
+
+    forkTsPlugInInstances.options.typescript.build = true;
+
+    return config;
+  },
   addLessLoader({
     lessLoaderOptions: {
       lessOptions: {
