@@ -1,69 +1,38 @@
 import {
   useTheme,
-  Button,
   Input,
   Alert,
   Typography,
+  Select,
 } from '@nomada-sh/react-eyecandy';
 
 const { Paragraph, Title } = Typography;
+const { Option } = Select;
 
 export function ToggleTheme() {
-  const { dark, toggleDark, addThemeChanges, clearThemeChanges } = useTheme();
+  const { themes, switcher, currentTheme } = useTheme();
 
   return (
-    <div>
-      <Typography.Paragraph>
-        Theme: {dark ? 'dark' : 'light'}
-      </Typography.Paragraph>
-      <Button
-        type="primary"
-        onClick={() => {
-          toggleDark();
+    <div
+      style={{
+        padding: '1rem',
+      }}
+    >
+      <Select
+        style={{
+          width: '100%',
         }}
-      >
-        Toggle dark theme
-      </Button>
-      <Button
-        onClick={() => {
-          clearThemeChanges();
+        onChange={(theme) => {
+          switcher({ theme });
         }}
+        value={currentTheme}
       >
-        Clear theme changes
-      </Button>
-      <div>
-        <label>Primary color </label>
-        <input
-          type="color"
-          onChange={(e) => {
-            addThemeChanges({
-              primary_color: e.target.value,
-            });
-          }}
-        />
-      </div>
-      <div>
-        <label>Text color </label>
-        <input
-          type="color"
-          onChange={(e) => {
-            addThemeChanges({
-              text_color: e.target.value,
-            });
-          }}
-        />
-      </div>
-      <div>
-        <label>Body background </label>
-        <input
-          type="color"
-          onChange={(e) => {
-            addThemeChanges({
-              body_background: e.target.value,
-            });
-          }}
-        />
-      </div>
+        {Object.keys(themes).map((theme) => (
+          <Option key={theme} value={theme}>
+            {theme[0].toUpperCase() + theme.slice(1)}
+          </Option>
+        ))}
+      </Select>
       <Input />
       <Input.Search />
       <Alert

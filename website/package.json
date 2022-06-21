@@ -15,7 +15,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@nomada-sh/react-eyecandy": "^0.0.2",
+    "@nomada-sh/react-eyecandy": "^0.0.3",
     "@docusaurus/core": "2.0.0-beta.21",
     "@docusaurus/preset-classic": "2.0.0-beta.21",
     "@mdx-js/react": "^1.6.22",
